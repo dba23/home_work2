@@ -14,8 +14,9 @@ public class Cylinder extends Geometry
         this.axis = axis;
     }
 
+
     public double getRadius() {
-        return radius;
+        return radius + radius;
     }
 
     public void setRadius(double radius) {
@@ -54,5 +55,11 @@ public class Cylinder extends Geometry
                 "\nradius=" + radius +
                 "\nheight=" + height +
                 "\naxis=" + axis;
+
+    }
+
+   public void print( String s)
+    {
+        System.out.println(s);
     }
 }
