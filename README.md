@@ -1,1 +1,3 @@
-# home_work2
+# project in computer graphics
+created by dvir benabu & sam mordoch
+
