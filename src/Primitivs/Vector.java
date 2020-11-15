@@ -4,10 +4,17 @@ import java.util.Objects;
 
 public class Vector
 {
-    Point3D head;
+    private Point3D head;
 
     public Vector(Point3D head) {
-        this.head = head;
+        this.setHead(head);//vrc
+    }
+
+    public Vector(double _X,double _Y,double _Z)
+    {
+        this.head.set_x(new Coordinate(_X));
+        this.head.set_y(new Coordinate(_Y));
+        this.head.set_z(new Coordinate(_Z));
     }
 
     public Point3D getHead() {
@@ -23,11 +30,59 @@ public class Vector
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vector vector = (Vector) o;
-        return Objects.equals(head, vector.head);
+        return Objects.equals(getHead(), vector.getHead());
     }
 
     @Override
     public String toString() {
-        return "head =" + head;
+        return "head =" + getHead();
     }
+    public double length()
+    {
+        return Math.sqrt(Math.pow(this.getHead().get_x().getCoordinate(),2)+Math.pow(this.getHead().get_x().getCoordinate(),2)+
+                Math.pow(this.getHead().get_x().getCoordinate(),2));
+    }
+    public Vector add(Vector other)
+    {
+        return new Vector(new Point3D(new Coordinate(this.getHead().get_x().getCoordinate()+other.getHead().get_x().getCoordinate()),
+        new Coordinate(this.getHead().get_y().getCoordinate()+other.getHead().get_y().getCoordinate()),
+                new Coordinate(this.getHead().get_z().getCoordinate()+other.getHead().get_z().getCoordinate())));
+    }
+    public Vector subtract(Vector other)
+    {
+        return new Vector(new Point3D(new Coordinate(this.getHead().get_x().getCoordinate()-other.getHead().get_x().getCoordinate()),
+                new Coordinate(this.getHead().get_y().getCoordinate()-other.getHead().get_y().getCoordinate()),
+                new Coordinate(this.getHead().get_z().getCoordinate()-other.getHead().get_z().getCoordinate())));
+
+    }
+    public Vector scale(double scalar){
+        return new Vector(new Point3D(new Coordinate(this.getHead().get_x().getCoordinate()*scalar),
+                new Coordinate(this.getHead().get_x().getCoordinate()*scalar),
+                new Coordinate(this.getHead().get_x().getCoordinate()*scalar)));
+
+    }
+    public Vector crossProduct(Vector other)
+    {
+        Coordinate c1,c2,c3;
+        c1 = new Coordinate(this.getHead().get_y().getCoordinate()*other.getHead().get_z().getCoordinate()-this.getHead().get_z().getCoordinate()*other.getHead().get_y().getCoordinate());
+        c2 = new Coordinate(this.getHead().get_x().getCoordinate()*other.getHead().get_z().getCoordinate()-this.getHead().get_z().getCoordinate()*other.getHead().get_x().getCoordinate());
+        c3 = new Coordinate(this.getHead().get_y().getCoordinate()*other.getHead().get_x().getCoordinate()-this.getHead().get_x().getCoordinate()*other.getHead().get_y().getCoordinate());
+        return new Vector(new Point3D(c1,c2,c3));
+    }
+
+    public double dotProduct(Vector other)
+    {
+        return this.getHead().get_x().getCoordinate()*other.getHead().get_x().getCoordinate()+
+                this.getHead().get_y().getCoordinate()*other.getHead().get_y().getCoordinate()+
+                this.getHead().get_z().getCoordinate()*other.getHead().get_z().getCoordinate();
+    }
+    public Vector normalize()
+    {
+        return new Vector(new Point3D(new Coordinate(this.getHead().get_x().getCoordinate()/this.length()),
+                new Coordinate(this.getHead().get_y().getCoordinate()/this.length()),
+                new Coordinate(this.getHead().get_z().getCoordinate()/this.length())));
+    }
+
+
+
 }

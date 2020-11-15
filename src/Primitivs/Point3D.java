@@ -50,6 +50,26 @@ public class Point3D
                 Objects.equals(_y, point3D._y) &&
                 Objects.equals(_z, point3D._z);
     }
+    public Point3D add(Vector vector)
+    {
+        Point3D newPoint;
+        newPoint = new Point3D(new Coordinate(this.get_x().getCoordinate()+vector.getHead().get_x().getCoordinate()),
+              new Coordinate(this.get_y().getCoordinate()+vector.getHead().get_y().getCoordinate()),
+                new Coordinate( this.get_z().getCoordinate()+vector.getHead().get_z().getCoordinate()));
+        return newPoint;
+    }
+    public Vector subtract(Point3D other)
+    {
+        return new Vector(new Point3D(new Coordinate(this.get_x().getCoordinate()-other.get_x().getCoordinate()),
+                new Coordinate(this.get_y().getCoordinate()-other.get_y().getCoordinate()),
+                new Coordinate(this.get_z().getCoordinate()-other.get_z().getCoordinate())));
 
+    }
+    public double distant(Point3D other)
+    {
+        return Math.sqrt(Math.pow(this.get_x().getCoordinate()-other.get_x().getCoordinate(),2)+
+                Math.pow(this.get_y().getCoordinate()-other.get_y().getCoordinate(),2)+
+                Math.pow(this.get_z().getCoordinate()-other.get_z().getCoordinate(),2));
+    }
 
 }

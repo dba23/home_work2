@@ -16,7 +16,7 @@ public class Cylinder extends Geometry
 
 
     public double getRadius() {
-        return radius + radius;
+        return radius ;
     }
 
     public void setRadius(double radius) {
