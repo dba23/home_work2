@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Point3D
 {
+    public static final Point3D ZERO = new Point3D(0,0,0);
     Coordinate _x,_y,_z;
 
     public Point3D(Coordinate _x, Coordinate _y, Coordinate _z) {
@@ -77,5 +78,6 @@ public class Point3D
                 Math.pow(this.get_y().getCoordinate()-other.get_y().getCoordinate(),2)+
                 Math.pow(this.get_z().getCoordinate()-other.get_z().getCoordinate(),2));
     }
+
 
 }
