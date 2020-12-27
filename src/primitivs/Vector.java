@@ -1,4 +1,4 @@
-package Primitivs;
+package primitivs;
 
 import java.util.Objects;
 
@@ -37,8 +37,9 @@ public class Vector
     }
     public double length()
     {
-        return Math.sqrt((Math.pow(this.head._x.coordinate,2)+Math.pow(this.head._y.coordinate,2)+Math.pow(this.head._z.coordinate,2)));
-    }
+        return Math.sqrt(
+                Math.pow(this.getHead().get_x().getCoordinate(), 2) + Math.pow(this.getHead().get_y().getCoordinate(), 2) +
+                        Math.pow(this.getHead().get_z().getCoordinate(), 2));    }
     public Vector add(Vector other)
     {
         return new Vector(new Point3D(new Coordinate(this.getHead().get_x().getCoordinate()+other.getHead().get_x().getCoordinate()),
@@ -63,16 +64,14 @@ public class Vector
     {
         Coordinate c1,c2,c3;
         c1 = new Coordinate(this.getHead().get_y().getCoordinate()*other.getHead().get_z().getCoordinate()-this.getHead().get_z().getCoordinate()*other.getHead().get_y().getCoordinate());
-        c2 = new Coordinate(this.getHead().get_x().getCoordinate()*other.getHead().get_z().getCoordinate()-this.getHead().get_z().getCoordinate()*other.getHead().get_x().getCoordinate());
-        c3 = new Coordinate(this.getHead().get_y().getCoordinate()*other.getHead().get_x().getCoordinate()-this.getHead().get_x().getCoordinate()*other.getHead().get_y().getCoordinate());
+        c2 = new Coordinate(this.getHead().get_z().getCoordinate()*other.getHead().get_x().getCoordinate()-this.getHead().get_x().getCoordinate()*other.getHead().get_z().getCoordinate());
+        c3 = new Coordinate(this.getHead().get_x().getCoordinate()*other.getHead().get_y().getCoordinate()-this.getHead().get_y().getCoordinate()*other.getHead().get_x().getCoordinate());
         return new Vector(new Point3D(c1,c2,c3));
     }
 
     public double dotProduct(Vector other)
     {
-        return this.getHead().get_x().getCoordinate()*other.getHead().get_x().getCoordinate()+
-                this.getHead().get_y().getCoordinate()*other.getHead().get_y().getCoordinate()+
-                this.getHead().get_z().getCoordinate()*other.getHead().get_z().getCoordinate();
+        return this.getHead().get_x().getCoordinate()*other.getHead().get_x().getCoordinate() + this.getHead().get_y().getCoordinate()*other.getHead().get_y().getCoordinate() + this.getHead().get_z().getCoordinate()*other.getHead().get_z().getCoordinate();
     }
     public Vector normalize()
     {

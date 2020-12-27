@@ -1,4 +1,4 @@
-package Primitivs;
+package primitivs;
 
 import java.util.Objects;
 
@@ -17,6 +17,17 @@ public class Point3D
         this._x=new Coordinate(x);
         this._y=new Coordinate(y);
         this._z=new Coordinate(z);
+    }
+
+    public Point3D() {
+        _x = new Coordinate();
+        _y = new Coordinate(1);
+        _z = new Coordinate();
+    }
+    public Point3D(Point3D add) {
+        this._z=add._z;
+        this._x=add._x;
+        this._y=add._y;
     }
 
     public Coordinate get_x() {

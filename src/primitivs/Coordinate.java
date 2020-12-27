@@ -1,8 +1,12 @@
-package Primitivs;
+package primitivs;
 
 public class Coordinate
 {
     double coordinate;
+    public Coordinate()
+    {
+        this.coordinate = 0;
+    }
 
     public Coordinate(double coordinate) {
         this.coordinate = coordinate;

@@ -1,8 +1,8 @@
-package Elements;
+package elements;
 
-import Primitivs.Point3D;
-import Primitivs.Ray;
-import Primitivs.Vector;
+import primitivs.Point3D;
+import primitivs.Ray;
+import primitivs.Vector;
 
 import java.util.Objects;
 
@@ -15,12 +15,12 @@ public class Camera {
     //constructors
     public Camera(Point3D _P0, Vector _vup, Vector _vright, Vector _vtoward) {
         this._P0 = _P0;
-        this._vup = _vup;
-        this._vright = _vright;
-        this._vtoward = _vtoward;
+        this._vup = _vup.normalize();
+        this._vright = _vright.normalize();
+        this._vtoward = _vtoward.normalize();
     }
 
-    public Camera(Point3D _P0, Vector _vup, Vector _vtoward) {
+    public Camera(Point3D _P0, Vector _vtoward, Vector _vup) {
         this._P0 = _P0;
         this._vup = _vup;
         this._vtoward = _vtoward;
@@ -84,16 +84,25 @@ public class Camera {
 
     public Ray constructRayThroughPixel(
             int nX,int nY,double j, double i, double screenDist, double screenWidth,double screenHight ){
-        Point3D Pc=get_P0().add(_vtoward.scale(screenDist));
-        double Ry=screenHight/nY;
-        double Rx=screenWidth/nX;
-        double Yi=(i-nY/2)*Ry+Ry/2;
-        double Xj=(j-nX/2)*Rx+Rx/2;
-        //Point3D Pij=Pc.add((_vright.scale(Xj)).subtract((_vup.scale(Yi))));
-        Point3D Pij=Pc.add((_vright.scale((j-(nX-1)/2)*Rx)).subtract(_vup.scale((i-(nY-1)/2)*Ry)));
-        Vector Vij=Pij.subtract(_P0);
 
-        return new Ray(_P0,Vij.normalize());
+        Point3D Pc,pixelCenter;
+        Vector rayMiddle,newVright,newVup,vRightSubvUp;
+        Pc = get_P0().add(_vtoward.scale(screenDist));//image center
+        double Rx,Ry, x, y;
+        Rx = screenWidth/nX;
+        Ry = screenHight/nY;
+        //	Ratio of x(width) y(Height)
+        y = nY - 1;
+        x = nX - 1;
+        y = (j - (y/2))*Ry;
+        x = (i - (x/2))*Rx;
+        newVright =  _vright.scale(y);//vRight*y
+        newVup = _vup.scale(x);//vUp*x
+        vRightSubvUp = newVright.subtract(newVup);//vRight*y-vUp*x
+        pixelCenter = Pc.add(vRightSubvUp);//pixel[i,j]
+        rayMiddle = pixelCenter.subtract(get_P0());//V[i,j]
+        return new Ray(get_P0(),rayMiddle.normalize());
+
     }
 }
 

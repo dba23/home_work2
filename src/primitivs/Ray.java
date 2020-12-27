@@ -1,4 +1,4 @@
-package Primitivs;
+package primitivs;
 
 import java.util.Objects;
 

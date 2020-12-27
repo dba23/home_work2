@@ -1,5 +1,5 @@
-package Geometries;
-import Primitivs.*;
+package geometries;
+import primitivs.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -33,5 +33,15 @@ public class Polygon extends Geometry
     public String toString() {
         return "Polygon= " +
                 "points =" + points ;
+    }
+
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
+    }
+
+    @Override
+    public Vector getNormal(Point3D point) {
+        return null;
     }
 }

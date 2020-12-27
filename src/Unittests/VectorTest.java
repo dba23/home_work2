@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.function.Supplier;
-import Primitivs.*;
+import geometries.*;
+import primitivs.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -9,8 +9,15 @@ class VectorTest {
     @Test
     public void testLength() {
         // TC01: Simple test
-        assertEquals( 5d, new Vector(0, 3, 4).length(), 0.00001,"length() wrong value");
-
+       // assertEquals( 5d, new Vector(0, 3, 4).length(), 0.00001,"length() wrong value");
+        Vector v1 = new Vector(1,2,3);
+        Vector v2 = new Vector(3,2,1);
+        System.out.println("add "+v1+" "+v1.add(v2));
+        System.out.println("sub "+v1+" "+v1.subtract(v2));
+        System.out.println("cross "+v1+" "+v1.crossProduct(v2));
+        System.out.println("dot "+v1+" "+v1.dotProduct(v2));
+        System.out.println("scale "+v1+" "+v1.scale(7));
+        System.out.println("norm "+v1+" "+v1.normalize());
     }
 
     @Test

@@ -1,8 +1,8 @@
-package Elements;
+package elements;
 
-import Primitivs.Ray;
-import Primitivs.Vector;
-import Primitivs.Point3D;
+import primitivs.Ray;
+import primitivs.Vector;
+import primitivs.Point3D;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,13 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class CameraTest { @Test
 public void testConstructRayThroughPixel() {
     Camera camera = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
+    //System.out.println(camera._vright);
     // ============ Equivalence Partitions Tests ==============
     // TC01: 3X3 Corner (0,0)
     assertEquals( new Ray(Point3D.ZERO, new Vector(-2, -2, 10).normalize()),
             camera.constructRayThroughPixel(3, 3, 0, 0, 10, 6, 6),"Bad ray");
 
     // TC02: 4X4 Corner (0,0)
-    assertEquals( new Ray(Point3D.ZERO, new Vector(-3, -3, 10).normalize()),
+   assertEquals( new Ray(Point3D.ZERO, new Vector(-3, -3, 10).normalize()),
             camera.constructRayThroughPixel(4, 4, 0, 0, 10, 8, 8),"Bad ray");
 
     // TC03: 4X4 Side (0,1)
