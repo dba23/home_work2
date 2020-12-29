@@ -1,6 +1,8 @@
 package geometries;
 import primitivs.*;
+import primitivs.Point3D;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,7 +11,8 @@ public class Polygon extends Geometry
 {
     List<Point3D> points;
 
-    public Polygon(List<Point3D> points) {
+    public Polygon(List<Point3D> points, Color c) {
+        super(c);
         this.points = points;
     }
 

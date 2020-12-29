@@ -1,7 +1,9 @@
 package scene;
+import elements.Camera;
 import geometries.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,13 +13,27 @@ public class Scene
     List<Geometry> geometries;
     private double _screenDistance;
     private Color _background;
+    private Camera camera;
 
-
-    public Scene(String name, List<Geometry> geometries, double _screenDistance, Color _background) {
+    public Scene(String name, List<Geometry> geometries, double _screenDistance, Color _background, Camera camera) {
         this.name = name;
         this.geometries = geometries;
         this._screenDistance = _screenDistance;
         this._background = _background;
+        this.camera = camera;
+    }
+
+    public Scene(String test_scene) {
+        this.name = test_scene;
+        this.geometries = new ArrayList<Geometry>();
+    }
+
+    public Camera getCamera() {
+        return camera;
+    }
+
+    public void setCamera(Camera camera) {
+        this.camera = camera;
     }
 
     public double get_screenDistance() {
@@ -32,8 +48,11 @@ public class Scene
                 ", geometries=" + geometries +
                 ", _screenDistance=" + _screenDistance +
                 ", _background=" + _background +
+                ", camera=" + camera +
                 '}';
     }
+
+
 
     public void set_screenDistance(double _screenDistance) {
         this._screenDistance = _screenDistance;
@@ -73,7 +92,7 @@ public class Scene
     }
 
 
-    void addGeometry(Geometry geometry)
+    public void addGeometry(Geometry geometry)
     {
         this.geometries.add(geometry);
     }

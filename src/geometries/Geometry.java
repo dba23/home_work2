@@ -1,6 +1,7 @@
 package geometries;
 
 import primitivs.*;
+import primitivs.Point3D;
 
 import java.awt.*;
 import java.util.List;

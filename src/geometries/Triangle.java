@@ -1,23 +1,23 @@
 package geometries;
 
 import primitivs.*;
+import primitivs.Point3D;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Triangle extends Geometry implements Cloneable{
     Point3D p1,p2,p3;
 
-    public Triangle(Point3D p1, Point3D p2, Point3D p3) {
-        this.p1 = p1;
-        this.p2 = p2;
-        this.p3 = p3;
-    }
-    public Triangle()
-    {
-        this.p1=new Point3D(-1,0,0);
-        this.p2 =new Point3D(0,1, 0);
-        this.p3 =new Point3D(1,0, 0);
+
+
+    public Triangle(Point3D point3D, Point3D point3D1, Point3D point3D2, Color color) {
+        super(color);
+        this.p1 = point3D;
+        this.p2 = point3D1;
+        this.p3 = point3D2;
     }
 
     public Point3D getP1() {
@@ -69,7 +69,7 @@ public class Triangle extends Geometry implements Cloneable{
     public List<Point3D> findIntersections(Ray ray) {
         Point3D rayPoint = ray.getHeadPoint();
         Vector direction = ray.getDirection();
-        List<Point3D> intersectionPoint = null;
+        List<Point3D> intersectionPoint = new ArrayList<Point3D>();
 
         Vector vector1 = p1.subtract(rayPoint);
         Vector vector2 = p2.subtract(rayPoint);
@@ -84,7 +84,7 @@ public class Triangle extends Geometry implements Cloneable{
         double num3 = direction.dotProduct(normal3);
 
         if ((num1 > 0 && num2 > 0 && num3 > 0) || (num1 < 0 && num2 < 0 && num3 < 0)) {
-            Plane triangleOnPlane = new Plane(p1, p2, p3);
+            Plane triangleOnPlane = new Plane(p1, p2, p3,Color.black);
             intersectionPoint = triangleOnPlane.findIntersections(ray);
         }
         return intersectionPoint;

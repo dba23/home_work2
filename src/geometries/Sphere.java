@@ -1,7 +1,9 @@
 package geometries;
 
 import primitivs.*;
+import primitivs.Point3D;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -12,14 +14,14 @@ public class Sphere extends Geometry implements Cloneable {
     private Point3D center;
     private double radius;
 
-    public Sphere(Point3D center, double radius) {
-        setCenter(center);
-        setRadius(radius);
-    }
 
-    public Sphere() {
-        this.center = new Point3D();
-        this.radius = 0.0;
+
+
+    public Sphere(Point3D point3D, double r, Color color) {
+        super(color);
+
+        this.center = point3D;
+        this.radius = r;
     }
 
     public Object clone() throws CloneNotSupportedException {
@@ -66,7 +68,7 @@ public class Sphere extends Geometry implements Cloneable {
 
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        List<Point3D> intersectionPoints = null;
+        List<Point3D> intersectionPoints = new ArrayList<Point3D>();
         Point3D point = ray.getHeadPoint();
         Vector direction = ray.getDirection();
 

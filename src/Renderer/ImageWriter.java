@@ -65,6 +65,7 @@ public class ImageWriter {
             ((ImageWriteParam) jpgWriteParam).setCompressionQuality(1f);
             jpgWriter.setOutput(new FileImageOutputStream(ouFile));
             jpgWriter.write(null,new IIOImage(_image, null, null), jpgWriteParam);
+
         }
         catch (IOException e) {
             e.printStackTrace();

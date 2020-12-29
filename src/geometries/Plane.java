@@ -1,7 +1,9 @@
 package geometries;
 
 import primitivs.*;
+import primitivs.Point3D;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,12 +14,14 @@ public class Plane extends Geometry implements Cloneable {
     private Point3D pointOnPlane;
     private Vector vertical;
 
-    public Plane(Point3D centralPoint, Vector vertical) {
+    public Plane(Point3D centralPoint, Vector vertical, Color c) {
+        super(c);
         setPointOnPlane(centralPoint);
         setVertical(vertical.normalize());
     }
 
-    public Plane(Point3D point1,Point3D point2,Point3D point3) {
+    public Plane(Point3D point1, Point3D point2, Point3D point3, Color c) {
+        super(c);
         if (point1.equals(point2) || point1.equals(point3))
             throw new IllegalArgumentException("You can't send two identical points!");
         Vector v1 = point1.subtract(point2);

@@ -1,6 +1,8 @@
 package geometries;
 import primitivs.*;
+import primitivs.Point3D;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,7 +12,8 @@ public class Cylinder extends Geometry
     double radius,height;
     Ray axis;
 
-    public Cylinder(double radius, double height, Ray axis) {
+    public Cylinder(double radius, double height, Ray axis, Color c) {
+        super(c);
         this.radius = radius;
         this.height = height;
         this.axis = axis;
