@@ -24,7 +24,7 @@ public class DirectionalLight extends Light {
 
     @Override
     public Color getIntensity(Point3D point3D) {
-
+        return this.intensity;
     }
 
     @Override

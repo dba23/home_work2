@@ -17,6 +17,7 @@ public class Vector extends Point3D implements Cloneable {
 
     public Vector() { this._head = new Point3D(); }
 
+
     public Point3D get_head() {
         return _head;
     }

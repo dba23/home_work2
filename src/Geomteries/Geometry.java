@@ -17,6 +17,14 @@ public abstract class Geometry implements Cloneable {
         this.material = material;
     }
 
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
     public abstract List<Point3D> findIntersections(Ray ray);
     public abstract Vector getNormal(Point3D point);
 

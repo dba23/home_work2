@@ -28,7 +28,7 @@ public class AmbientLight extends Light {
 
     @Override
     public Color getIntensity(Point3D point3D) {
-        return new Color((int) (this.intensity.getRGB()*this.kA));
+        return new Color((int) (this.intensity.getRed()*this.kA),(int) (this.intensity.getGreen()*this.kA),(int) (this.intensity.getBlue()*this.kA));
     }
 
     @Override

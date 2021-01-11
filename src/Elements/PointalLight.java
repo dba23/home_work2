@@ -1,11 +1,12 @@
 package Elements;
 
 import Primitives.Point3D;
+import Primitives.Vector;
 
 import java.awt.*;
 import java.util.Objects;
 
-public class PointalLight extends Light {
+public abstract class PointalLight extends Light {
     Point3D pos;
     double kC,kL,kQ;
 
@@ -47,6 +48,19 @@ public class PointalLight extends Light {
 
     public void setkQ(double kQ) {
         this.kQ = kQ;
+    }
+
+    @Override
+    public Color getIntensity(Point3D point3D) {
+
+        System.out.println(this.intensity.getRGB()/(this.kC+(this.kL*point3D.distance(this.pos))+(this.kQ*Math.pow(point3D.distance(this.pos),2))));
+        System.out.println(this.intensity.getBlue());
+        return new Color((int)(this.intensity.getRed()/(this.kC+(this.kL*point3D.distance(this.pos))+(this.kQ*Math.pow(point3D.distance(this.pos),2)))),(int)(this.intensity.getGreen()/(this.kC+(this.kL*point3D.distance(this.pos))+(this.kQ*Math.pow(point3D.distance(this.pos),2)))),(int)(this.intensity.getBlue()/(this.kC+(this.kL*point3D.distance(this.pos))+(this.kQ*Math.pow(point3D.distance(this.pos),2)))));
+    }
+
+    @Override
+    public Vector getL(Point3D point3D) {
+        return point3D.subtract(this.pos);
     }
 
     @Override

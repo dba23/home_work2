@@ -19,6 +19,22 @@ public abstract class Light  {
         return intensity;
     }
 
+    public static int normalizedColor(int color) {
+        int results = color;
+        if (color > 255)
+            results = 255;
+        if (color < 0)
+            results = 0;
+        return results;
+    }
+    public static Color intensityFix(int red, int green, int blue) {
+        return new Color(normalizedColor(red), normalizedColor(green), normalizedColor(blue));
+    }
+
+
+
+
+
     public void setIntensity(Color intensity) {
         this.intensity = intensity;
     }

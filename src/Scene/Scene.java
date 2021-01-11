@@ -1,6 +1,8 @@
 package Scene;
 
+import Elements.AmbientLight;
 import Elements.Camera;
+import Elements.Light;
 import Geomteries.Geometry;
 
 import java.awt.*;
@@ -14,6 +16,8 @@ public class Scene {
     private Camera _camera;
     private double _screenDistance;
     private Color _background;
+    private AmbientLight ambientLight;
+    private List<Light> lightList;
 
     public Scene(String _name) {
         this._name = _name;
@@ -21,6 +25,33 @@ public class Scene {
         this._background = Color.BLACK;
         this._camera = new Camera();
     }
+
+    public Scene(String _name, List<Geometry> _geometries, Camera _camera, double _screenDistance, Color _background, AmbientLight ambientLight, List<Light> lightList) {
+        this._name = _name;
+        this._geometries = _geometries;
+        this._camera = _camera;
+        this._screenDistance = _screenDistance;
+        this._background = _background;
+        this.ambientLight = ambientLight;
+        this.lightList = lightList;
+    }
+
+    public AmbientLight getAmbientLight() {
+        return ambientLight;
+    }
+
+    public void setAmbientLight(AmbientLight ambientLight) {
+        this.ambientLight = ambientLight;
+    }
+
+    public List<Light> getLightList() {
+        return lightList;
+    }
+
+    public void setLightList(List<Light> lightList) {
+        this.lightList = lightList;
+    }
+
     public Scene() {
         this._name = new String();
         this._screenDistance = 0;
@@ -107,7 +138,11 @@ public class Scene {
                 ", _camera=" + _camera +
                 ", _screenDistance=" + _screenDistance +
                 ", _background=" + _background +
+                ", ambientLight=" + ambientLight +
+                ", lightList=" + lightList +
                 '}';
     }
-
+    public void addLight(Light light){
+        this.lightList.add(light);
+    }
 }
