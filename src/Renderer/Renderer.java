@@ -78,10 +78,12 @@ public class Renderer {
         for (Light l: this.scene.getLightList()) {
             Color c = calcDiffusive(gp.getGeometry().getMaterial().getKd(),gp.getGeometry().getNormal(gp.getPoint())
                     ,l.getL(gp.getPoint()),
-                    l.getIntensity());
+                    l.getIntensity(gp.getPoint()));
+
               diffuseLight = addColor(diffuseLight,c);
-            Color c1 = calcSpecular(gp.getGeometry().getMaterial().getKs(),this.scene.get_camera().get_P0().subtract(gp.getPoint()), gp.getGeometry().getNormal(gp.getPoint()),
-                      l.getL(gp.getPoint()),gp.getGeometry().getMaterial().getShininess(),l.getIntensity());
+
+              Color c1 = calcSpecular(gp.getGeometry().getMaterial().getKs(),this.scene.get_camera().get_P0().subtract(gp.getPoint()), gp.getGeometry().getNormal(gp.getPoint()),
+                      l.getL(gp.getPoint()),gp.getGeometry().getMaterial().getShininess(),l.getIntensity(gp.getPoint()));
               specularLight = addColor(specularLight,c1);
         }
         Color am_em = addColor(ambientLight,emissionLight);
@@ -92,32 +94,49 @@ public class Renderer {
 
 
     }
+//    private Color calcColor(GeoPoint gp){
+//        return gp.getGeometry().get_emission();
+//    }
+
 
     private Color calcSpecular(double ks, Vector subtract, Vector normal, Vector l, int shininess, Color intensity) {
         double r,g,b;
         double scale;
+//        l = l.scale(-1);
         r = intensity.getRed();
         g = intensity.getGreen();
         b = intensity.getBlue();
         Vector R ;
-        R = l.subtract(normal.scale(2*l.dotProduct(normal)));
-        scale =  (ks*(Math.pow(subtract.dotProduct(R),shininess)));
+        R = l.normalized().subtract(normal.scale(2*l.normalized().dotProduct(normal))).normalized();
+        scale =  (ks*(Math.pow(subtract.normalized().dotProduct(R),shininess)));
         return Light.intensityFix((int)(r*scale),
                 (int)(g*scale),
                 (int)(b*scale));
 
     }
 
-    public Color addColor(Color c1, Color c2 ){
-        return new Color(Math.min(255,Math.max(0,c1.getRed()+c2.getRed())),
-                Math.min(255,Math.max(0,c1.getGreen()+c2.getGreen())),
-                Math.min(255,Math.max(0,c1.getBlue()+c2.getBlue())));
+    public static Color addColor(Color c1, Color c2 ){
+            double r,g,b,half =0.5;
+            r = c1.getRed() + c2.getRed();
+            g = c1.getGreen() + c2.getGreen();
+            b = c1.getBlue() + c2.getBlue();
+            Color color = Light.intensityFix((int)r,(int) g,(int)b);
+
+        return color;
     }
 
     private Color calcDiffusive(double kd, Vector normal, Vector l, Color intensity) {
-        return new Color((int) (kd*(normal.dotProduct(l)*intensity.getRed())),
-                (int) (kd*(normal.dotProduct(l)*intensity.getGreen())),
-                (int) (kd*(normal.dotProduct(l)*intensity.getBlue())));
+        double scale = (kd) * (normal.normalized().dotProduct(l.normalized().scale(-1)));
+        double r,g,b;
+        r = intensity.getRed();
+        g = intensity.getGreen();
+        b = intensity.getBlue();
+
+        Color color =  Light.intensityFix((int)(r*scale),
+                (int)(g*scale),
+                (int)(b*scale));
+
+        return color ;
     }
 
     public Scene getScene() {

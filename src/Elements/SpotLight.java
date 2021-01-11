@@ -41,16 +41,12 @@ public class SpotLight extends PointalLight {
     @Override
     public Color getIntensity(Point3D point3D) {
 
-        int r = Math.min(255,Math.max((int) (super.getIntensity(point3D).getRed() * Math.max(0,this.dir.dotProduct(point3D.subtract(this.pos).normalized()))),0));
-        int g = Math.min(255,Math.max((int) (super.getIntensity(point3D).getGreen() * Math.max(0,this.dir.dotProduct(point3D.subtract(this.pos).normalized()))),0));
-        int b = Math.min(255,Math.max((int) (super.getIntensity(point3D).getBlue() * Math.max(0,this.dir.dotProduct(point3D.subtract(this.pos).normalized()))),0));
-        Color c =  new Color(r,g,b);
-
-        System.out.println(c);
+        int r = (int) (super.getIntensity(point3D).getRed() * Math.max(0,this.dir.dotProduct(getL(point3D).normalized())));
+        int g = (int) (super.getIntensity(point3D).getGreen() * Math.max(0,this.dir.dotProduct(getL(point3D).normalized())));
+        int b = (int) (super.getIntensity(point3D).getBlue() * Math.max(0,this.dir.dotProduct(getL(point3D).normalized())));
+        Color c =  Light.intensityFix(r,g,b);
 
 
-
-        System.out.println((point3D.subtract(this.pos)));
         return c;
     }
 

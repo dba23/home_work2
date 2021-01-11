@@ -51,16 +51,21 @@ public abstract class PointalLight extends Light {
     }
 
     @Override
-    public Color getIntensity(Point3D point3D) {
-
-        System.out.println(this.intensity.getRGB()/(this.kC+(this.kL*point3D.distance(this.pos))+(this.kQ*Math.pow(point3D.distance(this.pos),2))));
-        System.out.println(this.intensity.getBlue());
-        return new Color((int)(this.intensity.getRed()/(this.kC+(this.kL*point3D.distance(this.pos))+(this.kQ*Math.pow(point3D.distance(this.pos),2)))),(int)(this.intensity.getGreen()/(this.kC+(this.kL*point3D.distance(this.pos))+(this.kQ*Math.pow(point3D.distance(this.pos),2)))),(int)(this.intensity.getBlue()/(this.kC+(this.kL*point3D.distance(this.pos))+(this.kQ*Math.pow(point3D.distance(this.pos),2)))));
+    public Color getIntensity(Point3D point) {
+        int red = (int) (intensity.getRed());
+        int green = (int) (intensity.getGreen());
+        int blue = (int) (intensity.getBlue());
+        double _d = this.pos.distance(point);
+        double kRed = red/(kC + kL*_d + kQ*Math.pow(_d,2));
+        double kGreen = green/(kC + kL*_d + kQ*Math.pow(_d,2));
+        double kBlue = blue/(kC + kL*_d + kQ*Math.pow(_d,2));
+        Color intensity = intensityFix((int) kRed,(int) kGreen,(int) kBlue);// fixing in case the color's rgb is out of limits
+        return intensity;
     }
 
     @Override
     public Vector getL(Point3D point3D) {
-        return point3D.subtract(this.pos);
+        return this.pos.subtract(point3D).normalized();
     }
 
     @Override

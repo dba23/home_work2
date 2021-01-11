@@ -15,7 +15,7 @@ public abstract class Light  {
     }
     public abstract Color getIntensity(Point3D point3D);
     public abstract Vector getL(Point3D point3D);
-    public Color getIntensity() {
+    public Color get_Intensity() {
         return intensity;
     }
 
@@ -51,7 +51,7 @@ public abstract class Light  {
         if (this == o) return true;
         if (!(o instanceof Light)) return false;
         Light light = (Light) o;
-        return Objects.equals(getIntensity(), light.getIntensity());
+        return Objects.equals(get_Intensity(), light.get_Intensity());
     }
 
     @Override

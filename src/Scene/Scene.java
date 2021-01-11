@@ -17,7 +17,7 @@ public class Scene {
     private double _screenDistance;
     private Color _background;
     private AmbientLight ambientLight;
-    private List<Light> lightList;
+    private List<Light> lightList  = new ArrayList<>();
 
     public Scene(String _name) {
         this._name = _name;
