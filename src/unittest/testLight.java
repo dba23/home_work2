@@ -84,9 +84,56 @@ public class testLight{
         triangle.setMaterial(m1);
         scene.addGeometry(triangle);
 
-        scene.addLight(new SpotLight(new Color(255, 100, 100), new Point3D(-200, 200, 150), 0.1, 0.00001, 0.000005,new Vector(2, 2, 3)));
+        scene.addLight(new SpotLight(new Color(255, 100, 100), new Point3D(-200, 200, 150), 0.1, 0.00001, 0.00005,new Vector(2, 2, 3)));
 
         ImageWriter imageWriter = new ImageWriter("Spot test 2", 500, 500, 500, 500);
+
+        Renderer render = new Renderer(imageWriter, scene);
+
+        render.renderImage();
+
+    }
+@Test
+    public void myPic(){
+
+        Scene scene = new Scene("my_pic");
+        scene.set_background(new Color(0, 0, 0));
+        scene.set_camera(new Camera( new Point3D(0, 0, 0),new Vector(0.0, 0.0, 1.0),new Vector(0,-1, 0.0)));
+        scene.set_screenDistance(200);
+        scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), 0.1));
+
+
+        Sphere sphere = new Sphere(300, new Point3D(-370.0, 340.0, 1500),new Color(100, 150, 100));
+        Sphere sphere4 = new Sphere(200, new Point3D(-670.0, 780.0, 1500),new Color(200, 0, 100));
+        Sphere sphere1 = new Sphere(300, new Point3D(70.0, -40.0, 1000),new Color(100, 250, 100));
+        Sphere sphere2 = new Sphere(300, new Point3D(440.0, -400.0, 1000),new Color(250, 100, 100));
+        Material m=new Material(1,1,20);
+        Material m2=new Material(1,1,20);
+        Material m4=new Material(1,1,20);
+        Material m3=new Material(0.5,1.5,3);
+        sphere4.setMaterial(m3);
+        sphere2.setMaterial(m4);
+        sphere.setMaterial(m);
+        sphere1.setMaterial(m2);
+        scene.addGeometry(sphere);
+        scene.addGeometry(sphere2);
+        scene.addGeometry(sphere1);
+        scene.addGeometry(sphere4);
+
+        Triangle triangle = new Triangle(new Point3D(-125, 225, 260),
+                new Point3D(-225, 125, 260),
+                new Point3D(-225, 225, 270),
+                new Color (0, 0, 100));
+        Material m1=new Material(1,1,4);
+
+        triangle.setMaterial(m1);
+        scene.addGeometry(triangle);
+
+
+        scene.addLight(new SpotLight(new Color(0, 100, 0), new Point3D(-200, 200, 150), 0.1, 0.00001, 0.00005,new Vector(2, 2, 3)));
+         scene.addLight(new PointalLight(new Color(255, 0, 100), new Point3D(200, -200, -150), 0.1, 0.00001, 0.00005));
+
+        ImageWriter imageWriter = new ImageWriter("my_pic", 500, 500, 500, 500);
 
         Renderer render = new Renderer(imageWriter, scene);
 

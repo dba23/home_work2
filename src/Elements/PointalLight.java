@@ -6,7 +6,7 @@ import Primitives.Vector;
 import java.awt.*;
 import java.util.Objects;
 
-public abstract class PointalLight extends Light {
+public class PointalLight extends Light {
     Point3D pos;
     double kC,kL,kQ;
 
